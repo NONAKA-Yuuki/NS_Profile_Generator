@@ -1,0 +1,247 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "NotoSansJP";
+    src: url("fonts/NotoSansJP/NotoSansJP-Regular.woff2") format('woff2'),
+         url("fonts/NotoSansJP/NotoSansJP-Regular.woff") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "NotoSansJP";
+    src: url("fonts/NotoSansJP/NotoSansJP-Bold.woff2") format('woff2'),
+         url("fonts/NotoSansJP/NotoSansJP-Bold.woff") format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+// often used color
+$aqua: #1f286f;
+$main_color: #333;
+$b_1: #4d5156;
+$b_2: #3c4043;
+$bright: #F0F0F0;
+
+
+@keyframes headerAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 100;
+        transform: translateY(0);
+    }
+}
+
+// レイアウト幅
+$layout-width-inner: 1080px;
+// ブレークポイント
+$breakpoints: (
+  "sp": "screen and (max-width: 767px)",
+  "tab": "screen and (max-width: #{$layout-width-inner - 1px})",
+  "pc": "screen and (min-width: #{$layout-width-inner})",
+);
+// メディアクエリー
+@mixin mq($breakpoint: sp) {
+    @media #{map-get($breakpoints, $breakpoint)} {
+      @content;
+    }
+}
+
+body {
+    color: $main_color;
+    font-family: 'NotoSansJP', sans-serif;
+}
+
+
+
+
+/*------------------------------
+Main contents
+------------------------------*/
+
+
+
+header {
+    position: fixed;
+    top: 0;
+    height: 100px;
+    width: 100%;
+    padding: 0 40px;
+    background: #fff;
+    z-index: 99;
+    @include mq('sp') {
+        height: 60px;
+        padding: 0;
+    }
+    .header__inner {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        h1 {
+            a {
+               font-size: 2.4rem;
+               color: $aqua;
+               text-decoration: none;
+               @include mq('sp') {
+                   font-size: 2rem;
+                   margin-left: 20px;
+               }
+            }
+        }
+        .hum-box {
+            display: none;
+            z-index: 999;
+            cursor: pointer;
+            margin-right: 20px;
+            @include mq('sp') {
+                display: inline;
+            }
+            &.open {
+                .hum-line {
+                    &:nth-child(1) {
+                        top: 10px;
+                        -webkit-transform: rotate(45deg);
+                        transform: rotate(45deg);
+                    }
+                    &:nth-child(2) {
+                        -webkit-transform: translateY(-50%);
+                        transform: translateY(-50%);
+                        opacity: 0;
+                    }
+                    &:nth-child(3) {
+                        top: -10px;
+                        -webkit-transform: rotate(-45deg);
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+            .hum-line {
+                position: relative;
+                display: block;
+                height: 2px;
+                width: 30px;
+                background-color: $aqua;
+                -webkit-transition: ease .5s;
+                transition: ease .5s;
+                &:nth-child(1) {
+                    top: 0;
+                }
+                &:nth-child(2) {
+                    margin: 8px 0;
+                }
+                &:nth-child(3) {
+                    top: 0;
+                }
+            }
+        }
+        .header__nav {
+            display: flex;
+            align-items: center;
+            .header__nav__list {
+                list-style: none;
+                display: block;
+                .item {
+                    display: inline-block;
+                    letter-spacing: 0;
+                    a {
+                        position: relative;
+                        display: inline-block;
+                        font-size: 1.5rem;
+                        font-weight: 900;
+                        letter-spacing: 1px;
+                        cursor: pointer;
+                        color: $main_color;
+                        text-decoration: none;
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            bottom: -2px;
+                            left: 0;
+                            width: 100%;
+                            height: 2px;
+                            background: $aqua;
+                            transform: scale(0, 1);
+                            transform-origin: center top;
+                            transition: transform .3s;
+                        }
+                        &:hover::after {
+                            transform: scale(1, 1);
+                        }
+                    }
+                    & + .item {
+                        margin-left: 40px;
+                    }
+                }
+            }
+            @include mq('sp') {
+                display: flex;
+                position: absolute;
+                top: 60px;
+                width: 100%;
+                padding: 30px 0;
+                background-color: #fff;
+                text-align: center;
+                opacity: 0;
+                transform: translateX(-100%);
+                transition:all ease-in-out .5s;
+                z-index:990;
+                .header__nav__list {
+                    position: relative;
+                    width: 100%;
+                    height: auto;
+                    text-align: center;
+                    .item {
+                        display: block;
+                        margin: 20px 0;
+                        & + .item {
+                            margin-left: 0;
+                        }
+                    }
+                }
+                &.open {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+.container {
+    padding-top: 100px;
+    max-width: 600px;
+    @include mq('sp') {
+        padding-top: 40px;
+    }
+}
+
+
+.st0 {
+    fill: none;
+  }
+  .st1 {
+    font-family: "KozGoPr6N-Regular-83pv-RKSJ-H";
+  }
+  .st2 {
+    font-size: 36px;
+  }
+  .st3 {
+    font-family: "KozGoPr6N-Heavy-83pv-RKSJ-H";
+  }
+  .st4 {
+    font-size: 43px;
+  }
+  .st5 {
+    font-size: 31px;
+  }
