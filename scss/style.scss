@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+// Font設定（NotoSansJP）
 @font-face {
     font-family: "NotoSansJP";
     src: url("fonts/NotoSansJP/NotoSansJP-Regular.woff2") format('woff2'),
@@ -18,15 +18,9 @@
     font-weight: bold;
     font-style: normal;
 }
-
-
-// often used color
+// color
 $aqua: #1f286f;
 $main_color: #333;
-$b_1: #4d5156;
-$b_2: #3c4043;
-$bright: #F0F0F0;
-
 
 @keyframes headerAnimation {
     0% {
@@ -38,7 +32,6 @@ $bright: #F0F0F0;
         transform: translateY(0);
     }
 }
-
 // レイアウト幅
 $layout-width-inner: 1200px;
 // ブレークポイント
@@ -54,20 +47,15 @@ $breakpoints: (
     }
 }
 
+
 body {
     color: $main_color;
     font-family: 'NotoSansJP', sans-serif;
 }
 
-
-
-
 /*------------------------------
 Main contents
 ------------------------------*/
-
-
-
 header {
     position: fixed;
     top: 0;
@@ -359,22 +347,3 @@ main {
 .modal {
     display: none;
 }
-
-.st0 {
-    fill: none;
-  }
-  .st1 {
-    font-family: "KozGoPr6N-Regular-83pv-RKSJ-H";
-  }
-  .st2 {
-    font-size: 36px;
-  }
-  .st3 {
-    font-family: "KozGoPr6N-Heavy-83pv-RKSJ-H";
-  }
-  .st4 {
-    font-size: 43px;
-  }
-  .st5 {
-    font-size: 31px;
-  }
