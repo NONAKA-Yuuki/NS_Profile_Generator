@@ -1,111 +1,50 @@
-
-
-var canvas = null;
-var context = null;
-var image = null;
-var fixFileObject = null;
-var iconWidth = 80;
-var iconHeight = 80;
-var messageArea = null;
-
-document.addEventListener("DOMContentLoaded", function() {
-    canvas = document.getElementById("thumbnail");
-    context = canvas.getContext("2d");
-
-    messageArea = document.getElementById("message")
-
-    setFileEventListenner();
+//テキスト入力時のイベント　入力文字をSVGのTEXT要素に反映
+$(".svg-text").on("input", function (e) {
+    let targetTspan = $(this).data("target");
+    $(targetTspan).text($(this).val());
 });
 
-function setFileEventListenner() {
-    document.getElementById("file-selecter").addEventListener("change", createPreview);
-}
 
-function createPreview(event) {
 
-    fixFileObject = null;
 
-    var fileObject = event.target.files[0];
+//画像取得ボタンクリック時のイベント　SVG要素を画像に変換し表示する
+$("#create-image").on("click", function (e) {
+    //SVG要素をbase64エンコードしDataURI形式に変換
+    let svgElem = document.getElementById("svg-generator");
+    let svgStr = new XMLSerializer().serializeToString(svgElem);
+    let svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgStr)));
 
-    if (typeof fileObject === "undefined") {
-        return;
-    }
+    // HTMLCanvasElement オブジェクトを作成する
+    let canvas = document.createElement("canvas");
+    // CanvasRenderingContext2D オブジェクトを取得する
+    let ctx = canvas.getContext("2d");
 
-    if (fileObject.type.match(/^image\/(jpeg|png)$/) === null) {
-        // jpegとpng以外の場合はクリアして終了
-        var fileArea = document.getElementById("file-input");
-        fileArea.innerHTML = fileArea.innerHTML;
-        setFileEventListenner();
-        return;
-    }
+    // 新たな img 要素を作成
+    let image = new Image();
+    image.onload = function () {
+        //Retina対応しているブラウザだと画像がぼやけるため2倍にする
+        canvas.width = image.width * 10;
+        canvas.height = image.height * 10;
 
-    fixFileObject = fileObject;
-
-    image = new Image();
-
-    var reader = new FileReader();
-
-    reader.onload = (function(fileObject) {
-        return function(event) {
-            image.src = event.target.result;// base64
-        };
-    })(fileObject);
-
-    image.onload = function() {
-        drawCanvas();
-    }
-
-    reader.readAsDataURL(fileObject);
-}
-
-function drawCanvas() {
-    if (image !== null) {
-        var shortLength = image.width < image.height ? image.width : image.height;
-        var widthCutLength = image.width - shortLength;
-        var heightCutLength = image.height - shortLength;
-
-        canvas.width = iconWidth;
-        canvas.height = iconHeight;
-        context.clearRect(0, 0, iconWidth, iconHeight);
-        context.drawImage(image, widthCutLength / 2, heightCutLength / 2, shortLength, shortLength, 0, 0, iconWidth, iconHeight);
-    }
-}
-
-function submitResizeFile() {
-    if (image !== null && fixFileObject !== null) {
-
-        var resizeFileObject = null;
-
-        var image64Data = canvas.toDataURL(fixFileObject.type);
-        image64Data = image64Data.split(',')[1];
-        imageData = atob(image64Data);
-        var unit8Array = new Uint8Array(imageData.length);
-        unit8Array.forEach(function(element, index) {
-            unit8Array[index] = imageData.charCodeAt(index);
-        });
-        resizeFileObject = new File(
-            [unit8Array],
-            fixFileObject.name,
-            {
-                type: fixFileObject.type
-            }
+        //SVG画像をCanvasに描画
+        ctx.drawImage(
+            image,
+            0,
+            0,
+            image.width * 10,
+            image.height * 10,
+            0,
+            0,
+            canvas.width,
+            canvas.height
         );
 
-        var formData = new FormData();
-        formData.append("file", resizeFileObject);
+        //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
+        $("#svg-image").attr("src", canvas.toDataURL("image/png"));
 
-        // input type file の 値はjavascriptで上書き出来ないのでajaxで送信する
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    messageArea.innerHTML = '<span style="color: green;">ファイルの送信に成功しました。</span>';
-                } else {
-                    messageArea.innerHTML = '<span style="color: red;">ファイルの送信に失敗しました。</span>';
-                }
-            }
-        }
-        xhr.open("POST", "/root/execute_upload");
-        xhr.send(formData);
-    }
-}
+        //bootstrap4のモーダルを表示
+        $("#svg-box").modal();
+    };
+    // Base64にエンコードしたSVG画像を設定
+    image.src = svgBase64;
+});

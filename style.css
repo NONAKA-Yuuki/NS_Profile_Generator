@@ -1,7 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  font-size: 62.5%;
   box-sizing: border-box;
 }
 
@@ -44,7 +43,7 @@ header {
   background: #fff;
   z-index: 99;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1199px) {
   header {
     height: 60px;
     padding: 0;
@@ -59,13 +58,13 @@ header .header__inner {
   align-items: center;
 }
 header .header__inner h1 a {
-  font-size: 2.4rem;
+  font-size: 24px;
   color: #1f286f;
   text-decoration: none;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1199px) {
   header .header__inner h1 a {
-    font-size: 2rem;
+    font-size: 20px;
     margin-left: 20px;
   }
 }
@@ -75,7 +74,7 @@ header .header__inner .hum-box {
   cursor: pointer;
   margin-right: 20px;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1199px) {
   header .header__inner .hum-box {
     display: inline;
   }
@@ -128,7 +127,7 @@ header .header__inner .header__nav .header__nav__list .item {
 header .header__inner .header__nav .header__nav__list .item a {
   position: relative;
   display: inline-block;
-  font-size: 1.5rem;
+  font-size: 15px;
   font-weight: 900;
   letter-spacing: 1px;
   cursor: pointer;
@@ -153,7 +152,7 @@ header .header__inner .header__nav .header__nav__list .item a:hover::after {
 header .header__inner .header__nav .header__nav__list .item + .item {
   margin-left: 40px;
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 1199px) {
   header .header__inner .header__nav {
     display: flex;
     position: absolute;
@@ -186,29 +185,60 @@ header .header__inner .header__nav .header__nav__list .item + .item {
   }
 }
 
-.container {
+main {
   padding-top: 100px;
-  max-width: 600px;
+  max-width: 1240px;
   margin: 0 auto;
 }
+@media screen and (max-width: 1199px) {
+  main {
+    margin: 0 16px;
+  }
+}
 @media screen and (max-width: 767px) {
-  .container {
+  main {
     padding-top: 40px;
   }
 }
 
-input {
-  width: calc(100% - 32px);
-  border: none;
-  font-size: 2rem;
-  margin: 8px 16px;
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-input:focus {
-  outline: none;
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
 }
-input::placeholder {
-  color: #1f286f;
-  opacity: 0.3;
+.container .svg_box {
+  width: 580px;
+}
+@media screen and (max-width: 1199px) {
+  .container .svg_box {
+    width: 360px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .container .svg_box {
+    width: 100%;
+  }
+}
+.container .inputData_box {
+  width: 580px;
+  height: calc(100vh - 200px);
+  overflow: scroll;
+}
+@media screen and (max-width: 1199px) {
+  .container .inputData_box {
+    width: 360px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .container .inputData_box {
+    width: 100%;
+    height: calc(50vh - 80px);
+  }
 }
 
 .input_box {
@@ -216,6 +246,93 @@ input::placeholder {
   border: solid 2px #1f286f;
   border-radius: 8px;
   margin-bottom: 16px;
+  padding: 8px 16px;
+}
+.input_box p {
+  font-size: 20px;
+  color: #1f286f;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.input_box textarea {
+  display: inline-block;
+  width: calc(100% - 32px);
+  padding: 8px;
+  vertical-align: top;
+  max-height: 170px;
+  border: none;
+  font-size: 18px;
+  font-family: "NotoSansJP", sans-serif;
+  font-weight: normal;
+  outline: none;
+  line-height: 1.6;
+  resize: vertical;
+}
+.input_box .label_box label {
+  font-size: 16px;
+}
+.input_box .label_box label:not(:nth-child(1)) {
+  margin-left: 32px;
+}
+.input_box .label_box input[type=radio] {
+  margin-right: 8px;
+}
+.input_box input[type=text] {
+  width: calc(100% - 32px);
+  border: none;
+  font-size: 20px;
+}
+.input_box input[type=text]:focus {
+  outline: none;
+}
+.input_box input[type=text]::placeholder {
+  color: #1f286f;
+  opacity: 0.3;
+}
+.input_box input[type=textarea] {
+  width: calc(100% - 32px);
+  display: block;
+  font-size: 20px;
+  border: none;
+}
+.input_box input[type=textarea]::placeholder {
+  color: #1f286f;
+  opacity: 0.3;
+}
+.input_box input[type=textarea]:focus {
+  outline: none;
+}
+
+.ns_select-box p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.ns_select-box .radiobox input {
+  vertical-align: middle;
+  margin-right: 16px;
+}
+.ns_select-box .radiobox label {
+  font-size: 16px;
+}
+.ns_select-box .radiobox label:not(:nth-child(1)) {
+  margin-left: 40px;
+}
+
+.svg-make_button {
+  padding: 8px 32px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  background: #1f286f;
+  color: #fff;
+  cursor: pointer;
+}
+.svg-make_button:active {
+  opacity: 0.5;
+}
+
+.modal {
+  display: none;
 }
 
 .st0 {
