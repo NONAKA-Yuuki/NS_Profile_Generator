@@ -189,11 +189,33 @@ header .header__inner .header__nav .header__nav__list .item + .item {
 .container {
   padding-top: 100px;
   max-width: 600px;
+  margin: 0 auto;
 }
 @media screen and (max-width: 767px) {
   .container {
     padding-top: 40px;
   }
+}
+
+input {
+  width: calc(100% - 32px);
+  border: none;
+  font-size: 2rem;
+  margin: 8px 16px;
+}
+input:focus {
+  outline: none;
+}
+input::placeholder {
+  color: #1f286f;
+  opacity: 0.3;
+}
+
+.input_box {
+  width: 100%;
+  border: solid 2px #1f286f;
+  border-radius: 8px;
+  margin-bottom: 16px;
 }
 
 .st0 {
