@@ -28,7 +28,19 @@ function NS_selectSwitch() {
 }
 window.addEventListener('load', NS_selectSwitch());
 
-
+// 画像アップロード
+function previewImage(hoge) {
+  var fileData = new FileReader();
+  fileData.onload = (function() {
+    const base64Text = event.currentTarget.result
+    $icon = $("#js-icon_image");
+    $icon.attr(
+      "xlink:href",
+      base64Text
+    )
+  });
+  fileData.readAsDataURL(hoge.files[0]);
+}
 
 //テキスト入力時のイベント　入力文字をSVGのTEXT要素に反映
 $(".svg-text").on("input", function (e) {
@@ -64,7 +76,6 @@ $(".svg-text").on("input", function (e) {
     $(targetTspan).text($(this).val());
   }
 });
-
 
 //画像取得ボタンクリック時のイベント　SVG要素を画像に変換し表示する
 $("#js-create-image").on("click", function(e) {

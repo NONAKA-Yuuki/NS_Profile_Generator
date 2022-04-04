@@ -347,3 +347,9 @@ main {
 .modal {
     display: none;
 }
+
+.usage_container {
+    max-width: $layout-width-inner;
+    margin: 0 auto;
+    padding: 0 16px;
+}
