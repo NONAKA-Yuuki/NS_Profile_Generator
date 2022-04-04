@@ -112,4 +112,13 @@ $("#js-create-image").on("click", function(e) {
   };
   // Base64にエンコードしたSVG画像を設定
   image.src = svgBase64;
+
+  // モーダルを表示
+  $('#modalArea').fadeIn();
+});
+
+$(function() {
+  $('closeModal , #modalArea').click(function() {
+    $('#modalArea').fadeOut();
+  });
 });
