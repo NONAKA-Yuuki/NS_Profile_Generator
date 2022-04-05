@@ -31,7 +31,7 @@ window.addEventListener('load', NS_selectSwitch());
 // 画像アップロード
 function previewImage(hoge) {
   var fileData = new FileReader();
-  fileData.onload = (function() {
+  fileData.onload = (function(event) {
     const base64Text = event.currentTarget.result
     $icon = $("#js-icon_image");
     $icon.attr(
@@ -109,12 +109,11 @@ $("#js-create-image").on("click", function(e) {
       );
       //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
       $("#svg-image").attr("src", canvas.toDataURL("image/png"));
+      // モーダルを表示
+      $('#modalArea').fadeIn();
   };
   // Base64にエンコードしたSVG画像を設定
   image.src = svgBase64;
-
-  // モーダルを表示
-  $('#modalArea').fadeIn();
 });
 
 $(function() {
