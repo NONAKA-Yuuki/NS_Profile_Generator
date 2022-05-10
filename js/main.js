@@ -31,8 +31,8 @@ window.addEventListener('load', NS_selectSwitch());
 // 画像アップロード
 function previewImage(hoge) {
   var fileData = new FileReader();
-  fileData.onload = (function(event) {
-    const base64Text = event.currentTarget.result
+  fileData.onload = (function(e) {
+    const base64Text = e.currentTarget.result
     $icon = $("#js-icon_image");
     $icon.attr(
       "xlink:href",
@@ -83,6 +83,7 @@ $("#js-create-image").on("click", function(e) {
   let svgElem = document.getElementById("svg-generator");
   let svgStr = new XMLSerializer().serializeToString(svgElem);
   let svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgStr)));
+  let imgElem = document.getElementById("svg-image");
 
   // HTMLCanvasElement オブジェクトを作成する
   let canvas = document.createElement("canvas");
@@ -91,29 +92,28 @@ $("#js-create-image").on("click", function(e) {
 
   // 新たな img 要素を作成
   let image = new Image();
-  image.onload = function() {
-      //Retina対応しているブラウザだと画像がぼやけるため2倍にする
-      canvas.width = image.width * 10;
-      canvas.height = image.height * 10;
-      //SVG画像をCanvasに描画
-      ctx.drawImage(
-          image,
-          0,
-          0,
-          image.width * 10,
-          image.height * 10,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-      );
-      //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
-      $("#svg-image").attr("src", canvas.toDataURL("image/png"));
-      // モーダルを表示
-      $('#modalArea').fadeIn();
-  };
+
   // Base64にエンコードしたSVG画像を設定
   image.src = svgBase64;
+
+  image.onload = function() {
+    //console.log(image.width, image.height);
+    canvas.width = 1500;
+    canvas.height = 1500;
+
+    //SVG画像をCanvasに描画
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
+    let datauri = canvas.toDataURL("image/png");
+    imgElem.src = datauri;
+
+    document.getElementById("download").href = datauri;
+  };
+  image.onerror = (error) => {
+    console.log(error)
+  };
+  // モーダルを表示
+  $('#modalArea').fadeIn();
 });
 
 $(function() {

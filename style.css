@@ -332,9 +332,9 @@ main {
   font-size: 16px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
   background: #1f286f;
   color: #fff;
-  cursor: pointer;
 }
 .svg-make_button:active {
   opacity: 0.5;
