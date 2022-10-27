@@ -88,6 +88,11 @@ function freespaceInput() {
   //文字表示ループ内で3つのテキストエリアをカウントアップ、ダウンできるように配列にする
   var freespace_textarea = ['#text-13','#text-14','#text-15'];
 
+  //60文字以上だったらエラーにする
+  if(arrayText.length >= 60) {
+    alert('60文字までです！');
+  }
+
   //20文字ごとの配列にする
 	for(var i=0; i<arrayText.length; i++){
 		var text = arrayText[i];

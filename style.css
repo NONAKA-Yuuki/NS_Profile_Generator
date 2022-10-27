@@ -278,6 +278,10 @@ main {
   line-height: 1.6;
   resize: vertical;
 }
+.input_box textarea::placeholder {
+  color: #1f286f;
+  opacity: 0.3;
+}
 .input_box .label_box label {
   font-size: 16px;
 }
@@ -298,19 +302,6 @@ main {
 .input_box input[type=text]::placeholder {
   color: #1f286f;
   opacity: 0.3;
-}
-.input_box input[type=textarea] {
-  width: calc(100% - 32px);
-  display: block;
-  font-size: 20px;
-  border: none;
-}
-.input_box input[type=textarea]::placeholder {
-  color: #1f286f;
-  opacity: 0.3;
-}
-.input_box input[type=textarea]:focus {
-  outline: none;
 }
 
 .ns_select-box p {
