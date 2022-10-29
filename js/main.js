@@ -129,10 +129,16 @@ function freespaceInput() {
 //画像取得ボタンクリック時のイベント　SVG要素を画像に変換し表示する
 $("#js-create-image").on("click", function(e) {
   //SVG要素をbase64エンコードしDataURI形式に変換
-  let svgElem = document.getElementById("svg-generator");
+  let svgElem = document.querySelector('#svg-generator');
   let svgStr = new XMLSerializer().serializeToString(svgElem);
-  let svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgStr)));
+  let svgEncode = encodeURIComponent(svgStr);
+  let svgUnescape = unescape(svgEncode);
+  let svgBase64 = btoa(svgUnescape);
+  let svgDataUrl = `data:image/svg+xml;charaset=utf-8;base64,${svgBase64}`;
+
   let imgElem = document.getElementById("svg-image");
+
+  //console.log(svgUnescape);
 
   // HTMLCanvasElement オブジェクトを作成する
   let canvas = document.createElement("canvas");
@@ -143,7 +149,7 @@ $("#js-create-image").on("click", function(e) {
   let image = new Image();
 
   // Base64にエンコードしたSVG画像を設定
-  image.src = svgBase64;
+  image.src = svgDataUrl;
 
   image.onload = function() {
     //console.log(image.width, image.height);
