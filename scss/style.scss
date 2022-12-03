@@ -279,6 +279,10 @@ main {
         outline: none;
         line-height: 1.6;
         resize: vertical;
+        &::placeholder {
+            color: $aqua;
+            opacity: 0.3;
+        }
     }
     .label_box {
         label {
@@ -301,19 +305,6 @@ main {
         &::placeholder {
             color: $aqua;
             opacity: 0.3;
-        }
-    }
-    input[type="textarea"] {
-        width: calc(100% - 32px);
-        display: block;
-        font-size: 20px;
-        border: none;
-        &::placeholder {
-            color: $aqua;
-            opacity: 0.3;
-        }
-        &:focus {
-            outline: none;
         }
     }
 }
@@ -341,9 +332,9 @@ main {
     font-size: 16px;
     border-radius: 8px;
     border: none;
+    cursor: pointer;
     background: $aqua;
     color: #fff;
-    cursor: pointer;
     &:active {
         opacity: 0.5;
     }

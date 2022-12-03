@@ -278,6 +278,10 @@ main {
   line-height: 1.6;
   resize: vertical;
 }
+.input_box textarea::placeholder {
+  color: #1f286f;
+  opacity: 0.3;
+}
 .input_box .label_box label {
   font-size: 16px;
 }
@@ -299,19 +303,6 @@ main {
   color: #1f286f;
   opacity: 0.3;
 }
-.input_box input[type=textarea] {
-  width: calc(100% - 32px);
-  display: block;
-  font-size: 20px;
-  border: none;
-}
-.input_box input[type=textarea]::placeholder {
-  color: #1f286f;
-  opacity: 0.3;
-}
-.input_box input[type=textarea]:focus {
-  outline: none;
-}
 
 .ns_select-box p {
   font-size: 16px;
@@ -332,9 +323,9 @@ main {
   font-size: 16px;
   border-radius: 8px;
   border: none;
+  cursor: pointer;
   background: #1f286f;
   color: #fff;
-  cursor: pointer;
 }
 .svg-make_button:active {
   opacity: 0.5;

@@ -31,8 +31,8 @@ window.addEventListener('load', NS_selectSwitch());
 // 画像アップロード
 function previewImage(hoge) {
   var fileData = new FileReader();
-  fileData.onload = (function() {
-    const base64Text = event.currentTarget.result
+  fileData.onload = (function(e) {
+    const base64Text = e.currentTarget.result
     $icon = $("#js-icon_image");
     $icon.attr(
       "xlink:href",
@@ -57,32 +57,88 @@ $(".svg-text").on("input", function (e) {
     $('#text-6').text('');
     $('#text-7').text('');
     $(targetTspan).text($(this).val());
-  } else if(targetTspan == "#text-13") {
+  } else if(targetTspan == "#text-13") {  // フリースペース
     let val_str = $(this).val();
     let val = val_str.length;
-    if(val <= 20) {
-      $('#text-13').text($(this).val());
-    } else if(20 < val && val <= 40) {
-      let val_14 = val_str.substr(20,40);
-      $('#text-14').text(val_14);
-    } else if(40 < val && val <= 60) {
-      let val_15 = val_str.substr(40,60);
-      $('#text-15').text(val_15);
-    } else {
-      console.log('Error: 文字数が異常値');
-    }
+
   }
    else {
     $(targetTspan).text($(this).val());
   }
 });
 
+
+/**********************/
+/* フリースペーステキスト */
+/**********************/
+let input_dom = document.querySelector('.text-freespace'); //入力要素
+let row_string_cnt = 20; //一行あたりの文字数
+
+input_dom.addEventListener('input', function(e){
+	freespaceInput();
+});
+
+function freespaceInput() {
+  //入力文字を1文字毎に配列化
+	var arrayText = input_dom.value.split('');
+  //出力用の配列を用意
+	var arrayRow = [];
+	arrayRow[0] = '';
+	var row_cnt = 0;
+  //文字表示ループ内で3つのテキストエリアをカウントアップ、ダウンできるように配列にする
+  var freespace_textarea = ['#text-13','#text-14','#text-15'];
+
+  //60文字以上だったらエラーにする
+  if(arrayText.length >= 60) {
+    alert('60文字までです！');
+  }
+
+  //20文字ごとの配列にする
+	for(var i=0; i<arrayText.length; i++){
+		var text = arrayText[i];
+		if(arrayRow[row_cnt].length >= row_string_cnt){
+			row_cnt++;
+			arrayRow[row_cnt] = '';
+		}
+		if(text == "\n"){
+			row_cnt++;
+			arrayRow[row_cnt] = '';
+			text = '';
+		}
+		arrayRow[row_cnt] += text;
+	}
+  //文字表示
+	for(var i=0; i<3; i++){
+		$(freespace_textarea[i]).text(arrayRow[i]);
+	}
+  //バグ対応
+  if(arrayRow.length == 1) {
+    $(freespace_textarea[1]).text("");
+    $(freespace_textarea[2]).text("");
+  }
+  else if(arrayRow.length == 2) {
+    $(freespace_textarea[2]).text("");
+  }
+}
+
+
+
+
+
+
 //画像取得ボタンクリック時のイベント　SVG要素を画像に変換し表示する
 $("#js-create-image").on("click", function(e) {
   //SVG要素をbase64エンコードしDataURI形式に変換
-  let svgElem = document.getElementById("svg-generator");
+  let svgElem = document.querySelector('#svg-generator');
   let svgStr = new XMLSerializer().serializeToString(svgElem);
-  let svgBase64 = "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgStr)));
+  let svgEncode = encodeURIComponent(svgStr);
+  let svgUnescape = unescape(svgEncode);
+  let svgBase64 = btoa(svgUnescape);
+  let svgDataUrl = `data:image/svg+xml;charaset=utf-8;base64,${svgBase64}`;
+
+  let imgElem = document.getElementById("svg-image");
+
+  //console.log(svgUnescape);
 
   // HTMLCanvasElement オブジェクトを作成する
   let canvas = document.createElement("canvas");
@@ -91,28 +147,26 @@ $("#js-create-image").on("click", function(e) {
 
   // 新たな img 要素を作成
   let image = new Image();
-  image.onload = function() {
-      //Retina対応しているブラウザだと画像がぼやけるため2倍にする
-      canvas.width = image.width * 10;
-      canvas.height = image.height * 10;
-      //SVG画像をCanvasに描画
-      ctx.drawImage(
-          image,
-          0,
-          0,
-          image.width * 10,
-          image.height * 10,
-          0,
-          0,
-          canvas.width,
-          canvas.height
-      );
-      //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
-      $("#svg-image").attr("src", canvas.toDataURL("image/png"));
-  };
-  // Base64にエンコードしたSVG画像を設定
-  image.src = svgBase64;
 
+  // Base64にエンコードしたSVG画像を設定
+  image.src = svgDataUrl;
+
+  image.onload = function() {
+    //console.log(image.width, image.height);
+    canvas.width = 1500;
+    canvas.height = 1500;
+
+    //SVG画像をCanvasに描画
+    ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    //Canvasに描画されている画像をBase64にエンコードしDataURI形式でsrc属性に設定
+    let datauri = canvas.toDataURL("image/png");
+    imgElem.src = datauri;
+
+    document.getElementById("download").href = datauri;
+  };
+  image.onerror = (error) => {
+    console.log(error)
+  };
   // モーダルを表示
   $('#modalArea').fadeIn();
 });

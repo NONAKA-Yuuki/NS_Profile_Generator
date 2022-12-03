@@ -12,12 +12,11 @@
         <div class="header__inner">
             <h1><a href="index.html">N・Sプロフィールジェネレーター</a></h1>
             <nav class="header__nav" id="js-header-menu">
-
                 <ul class="header__nav__list">
                     <li class="item"><a href="index.html">HOME</a></li>
                     <li class="item"><a href="usage.html">使い方</a></li>
                     <li class="item"><a href="https://nnn.ed.jp/" target="_blank" rel="noopener noreferrer">N高HP</a></li>
-                    <li class="item"><a href="https://twitter.com/Yuuki89363093" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+                    <li class="item"><a href="https://twitter.com/Yuuki_Nhs" target="_blank" rel="noopener noreferrer">Twitter</a></li>
                     <li class="item"><a href="#" target="_blank" rel="noopener noreferrer">Portfolio</a></li>
                 </ul>
             </nav>
@@ -186,7 +185,7 @@
                 </div>
                 <div class="input_box">
                     <p>フリースペース</p>
-                    <textarea name="freespace" wrap="hard" maxlength="60" class="form-control svg-text" data-target="#text-13" rows="3"></textarea>
+                    <textarea name="freespace" wrap="hard" maxlength="60" placeholder="60文字以内" class="form-control text-freespace" data-target="#text-13" rows="3"></textarea>
                 </div>
                 
                 <button class="svg-make_button" id="js-create-image">画像を取得</button>
@@ -200,6 +199,7 @@
         <div class="modalWrapper">
             <div class="modal_header">
                 <p>右クリック or 長押しで保存</p>
+                <a id="download" href="#" download="profile.png">ダウンロード</a>
                 <div class="modal_button" id="closeModal">
                     <span class="line"></span>
                     <span class="line"></span>
