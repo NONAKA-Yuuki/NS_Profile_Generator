@@ -17,17 +17,21 @@ function NS_selectSwitch() {
 window.addEventListener('load', NS_selectSwitch());
 
 // 画像アップロード
-function previewImage(hoge) {
+function uploadIconImage(hoge) {
   var fileData = new FileReader();
   fileData.onload = (function(e) {
     const base64Text = e.currentTarget.result
-    $icon = $("#js-icon_image");
-    $icon.attr(
-      "xlink:href",
-      base64Text
-    )
+    showIconImage(base64Text);
   });
   fileData.readAsDataURL(hoge.files[0]);
+}
+
+function showIconImage(img_b64) {
+  $icon = $("#js-icon_image");
+  $icon.attr(
+    "xlink:href",
+    img_b64
+  )
 }
 
 //テキスト入力時のイベント　入力文字をSVGのTEXT要素に反映
