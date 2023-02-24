@@ -247,6 +247,21 @@ main {
   padding: 0 16px;
 }
 
+.article {
+  width: 100%;
+  padding: 50px 20px;
+}
+.article h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 40px;
+}
+.article p {
+  font-size: 16px;
+  line-height: 2;
+  margin-bottom: 32px;
+}
+
 .modal-body .trimming-area {
   min-width: 100%;
 }
