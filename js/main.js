@@ -1,15 +1,3 @@
-// SP版ヘッダーのドロワー開閉
-$(function() {
-    $('#js-header-button').on('click', function() {
-        $(this).toggleClass('open');
-        $('#js-header-menu').toggleClass('open');
-    });
-});
-
-$('.header__nav__list a[href]').on('click', function(event) {
-    $('#js-header-button').trigger('click');
-});
-
 // N・S高切り替えラジオボタン
 function NS_selectSwitch() {
   let n_image = document.getElementById('js-n_image')
@@ -29,17 +17,63 @@ function NS_selectSwitch() {
 window.addEventListener('load', NS_selectSwitch());
 
 // 画像アップロード
-function previewImage(hoge) {
+function uploadIconImage(hoge) {
   var fileData = new FileReader();
   fileData.onload = (function(e) {
     const base64Text = e.currentTarget.result
-    $icon = $("#js-icon_image");
-    $icon.attr(
-      "xlink:href",
-      base64Text
-    )
+    showIconImage(base64Text);
   });
   fileData.readAsDataURL(hoge.files[0]);
+}
+
+
+//アイコン画像クロップ
+$(".js-imageFile").on("change", function(){
+  selectImage();
+});
+
+//選択ファイル読み込み
+function selectImage(){
+  var file = document.getElementById('image-file').files[0];
+  var reader = new FileReader();
+  reader.onload = function() {
+    showFileImage(reader)
+  }
+  reader.readAsDataURL(file);
+};
+//トリミング用のモーダルに画像をセットする(まだ非表示)
+function showFileImage(reader){
+  $(".js-trimmingAreaImg").attr("src", reader.result)
+};
+
+//モーダルが表示されたらトリミング画面開始
+$(".js-trimmingModal").on("shown.bs.modal", function(){
+  //画像トリミング
+  var image = $(".js-trimmingAreaImg")[0];
+  var options = {aspectRatio: 1 / 1};
+  var cropper = new Cropper(image, options);
+  //ボタンをクリックしたらトリミング終了
+  $(".js-trimmingBtn").one("click", function(e) {
+    //トリミングしたデータ
+    var result = cropper.getCroppedCanvas({width: 500, height: 500})
+    var result_dataurl = result.toDataURL()
+    //トリミングデータを表示
+    showIconImage(result_dataurl)
+    //$(".js-trimmedImg").attr("src", result.toDataURL())
+    // 一旦トリミングしたらトリミングのデータはリセット
+    cropper.destroy()
+    // モーダル非表示
+    $(".js-trimmingModal").modal("hide")
+  });
+});
+
+function showIconImage(img_b64) {
+  console.log(img_b64); // デバッグ用です
+  $icon = $("#js-icon_image");
+  $icon.attr(
+    "xlink:href",
+    img_b64
+  )
 }
 
 //テキスト入力時のイベント　入力文字をSVGのTEXT要素に反映

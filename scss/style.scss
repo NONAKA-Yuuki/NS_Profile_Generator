@@ -53,162 +53,7 @@ body {
     font-family: 'NotoSansJP', sans-serif;
 }
 
-/*------------------------------
-Main contents
-------------------------------*/
-header {
-    position: absolute;
-    top: 0;
-    height: 100px;
-    width: 100%;
-    padding: 0 40px;
-    background: #fff;
-    z-index: 10;
-    @include mq('tab') {
-        height: 60px;
-        padding: 0;
-    }
-    .header__inner {
-        height: 100%;
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        h1 {
-            margin-top: -10px;  // 文字上部の余白を打ち消す
-            line-height: 1;
-            a {
-               font-size: 24px;
-               color: $aqua;
-               text-decoration: none;
-               @include mq('tab') {
-                   font-size: 20px;
-                   margin-left: 20px;
-               }
-               @include mq('sp') {
-                   font-size: 16px;
-               }
-            }
-        }
-        .hum-box {
-            display: none;
-            z-index: 999;
-            cursor: pointer;
-            margin-right: 20px;
-            @include mq('tab') {
-                display: inline;
-            }
-            &.open {
-                .hum-line {
-                    &:nth-child(1) {
-                        top: 10px;
-                        -webkit-transform: rotate(45deg);
-                        transform: rotate(45deg);
-                    }
-                    &:nth-child(2) {
-                        -webkit-transform: translateY(-50%);
-                        transform: translateY(-50%);
-                        opacity: 0;
-                    }
-                    &:nth-child(3) {
-                        top: -10px;
-                        -webkit-transform: rotate(-45deg);
-                        transform: rotate(-45deg);
-                    }
-                }
-            }
-            .hum-line {
-                position: relative;
-                display: block;
-                height: 2px;
-                width: 30px;
-                background-color: $aqua;
-                -webkit-transition: ease .5s;
-                transition: ease .5s;
-                &:nth-child(1) {
-                    top: 0;
-                }
-                &:nth-child(2) {
-                    margin: 8px 0;
-                }
-                &:nth-child(3) {
-                    top: 0;
-                }
-            }
-        }
-        .header__nav {
-            display: flex;
-            align-items: center;
-            .header__nav__list {
-                list-style: none;
-                display: block;
-                .item {
-                    display: inline-block;
-                    letter-spacing: 0;
-                    a {
-                        position: relative;
-                        display: inline-block;
-                        font-size: 15px;
-                        font-weight: 900;
-                        letter-spacing: 1px;
-                        cursor: pointer;
-                        color: $main_color;
-                        text-decoration: none;
-                        &::after {
-                            content: '';
-                            position: absolute;
-                            bottom: -2px;
-                            left: 0;
-                            width: 100%;
-                            height: 2px;
-                            background: $aqua;
-                            transform: scale(0, 1);
-                            transform-origin: center top;
-                            transition: transform .3s;
-                        }
-                        &:hover::after {
-                            transform: scale(1, 1);
-                        }
-                    }
-                    & + .item {
-                        margin-left: 40px;
-                    }
-                }
-            }
-            @include mq('tab') {
-                display: flex;
-                position: absolute;
-                top: 60px;
-                width: 100%;
-                padding: 30px 0;
-                background-color: #fff;
-                text-align: center;
-                opacity: 0;
-                transform: translateX(-100%);
-                transition:all ease-in-out .5s;
-                z-index:990;
-                .header__nav__list {
-                    position: relative;
-                    width: 100%;
-                    height: auto;
-                    text-align: center;
-                    .item {
-                        display: block;
-                        margin: 20px 0;
-                        & + .item {
-                            margin-left: 0;
-                        }
-                    }
-                }
-                &.open {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        }
-    }
-}
+
 
 main {
     padding-top: 100px;
@@ -412,3 +257,9 @@ main {
         }
     }
 }
+
+@import 'pages/about';
+
+@import 'assets/cropModal';
+
+@import 'assets/header';
