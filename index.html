@@ -131,14 +131,15 @@
                         <tspan x="0" y="37.2" class="st1 st5" id="text-14"></tspan>
                         <tspan x="0" y="74.4" class="st1 st5" id="text-15"></tspan>
                     </text>
-                    <image id="js-icon_image" x="692" y="102" width="220" height="220" style="clip-path: circle(110px at 110px 110px)"></image>
+                    <image id="js-icon_image-1" x="692" y="102" width="220" height="220" style="clip-path: circle(110px at 110px 110px)"></image>
                 </svg>
             </div>
             <!-- input text -->
             <div class="inputData_box">
                 <div class="input_box">
                     <p>アイコン画像</p>
-                    <input type="file" id="js-icon_image" class="svg-text" accept="image/*" onchange="uploadIconImage(this)">
+                    <input type="file" class="js-imageFile svg-text" id="js-icon_image" accept="image/jpeg">
+                    <button class="trimming-btn" type="button" data-toggle="modal" data-target="#myModal">上の画像をトリミングする</button>
                 </div>
                 <div class="input_box">
                     <input type="text" class="svg-text" data-target="#text-1" value="" placeholder="名前を入力" maxlength="20"/>
@@ -203,7 +204,24 @@
         </div>
     </main>
 
-    
+    <div class="modal fade js-trimmingModal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">トリミンングしてください</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div class="trimming-area">
+                <img src="" class="js-trimmingAreaImg">
+              <!-- /.trimming-area --></div>
+            <!-- /.modal-body --></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger js-trimmingBtn" data-option="">これで決定</button>
+            </div>
+          <!-- /.modal-content --></div>
+        <!-- /.modal-dialog --></div>
+      <!-- /.modal --></div>
 
     <!-- modal -->
     <section id="modalArea" class="modalArea">
