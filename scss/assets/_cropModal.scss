@@ -1,0 +1,23 @@
+.modal-body {
+    .trimming-area {
+        min-width: 100%;
+        img {
+            width: 100%;
+        }
+    }
+}
+
+.trimming-btn {
+    display: inline-block;
+    padding: 0 6px;
+    background-color: red;
+    border: none;
+    border-radius: 8px;
+    text-align: center;
+    line-height: 2;
+    cursor: pointer;
+    color: #fff;
+    &:hover {
+        opacity: .5;
+    }
+}

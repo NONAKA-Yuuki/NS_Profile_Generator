@@ -247,6 +247,28 @@ main {
   padding: 0 16px;
 }
 
+.modal-body .trimming-area {
+  min-width: 100%;
+}
+.modal-body .trimming-area img {
+  width: 100%;
+}
+
+.trimming-btn {
+  display: inline-block;
+  padding: 0 6px;
+  background-color: red;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  line-height: 2;
+  cursor: pointer;
+  color: #fff;
+}
+.trimming-btn:hover {
+  opacity: 0.5;
+}
+
 header {
   position: absolute;
   top: 0;
