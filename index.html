@@ -12,6 +12,9 @@
     <meta name="twitter:image" content="https://nsprofile-generator.netlify.app/image/twitter_card.jpg">
 
     <title>N・S高プロフィール作っちゃお</title>
+
+    <link rel="stylesheet" href="css/cropper.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -135,70 +138,72 @@
             <div class="inputData_box">
                 <div class="input_box">
                     <p>アイコン画像</p>
-                    <input type="file" id="js-icon_image" class="form-control svg-text" accept="image/*" onchange="uploadIconImage(this)">
+                    <input type="file" id="js-icon_image" class="svg-text" accept="image/*" onchange="uploadIconImage(this)">
                 </div>
                 <div class="input_box">
-                    <input type="text" class="form-control svg-text" data-target="#text-1" value="" placeholder="名前を入力" maxlength="20"/>
+                    <input type="text" class="svg-text" data-target="#text-1" value="" placeholder="名前を入力" maxlength="20"/>
                 </div>
                 <div class="input_box">
-                    <input type="text" class="form-control svg-text" data-target="#text-2" value="" placeholder="年齢を入力" maxlength="2"/>
+                    <input type="text" class="svg-text" data-target="#text-2" value="" placeholder="年齢を入力" maxlength="2"/>
                 </div>
                 <div class="input_box">
-                    <input type="text" class="form-control svg-text" data-target="#text-3" value="" placeholder="何期生？" maxlength="1"/>
+                    <input type="text" class="svg-text" data-target="#text-3" value="" placeholder="何期生？" maxlength="1"/>
                 </div>
                 <div class="input_box">
                     <p>血液型</p>
                     <div class="label_box">
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-4" name="svg-blood" value="A">A</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-4" name="svg-blood" value="B">B</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-4" name="svg-blood" value="O">O</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-4" name="svg-blood" value="AB">AB</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-4" name="svg-blood" value="A">A</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-4" name="svg-blood" value="B">B</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-4" name="svg-blood" value="O">O</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-4" name="svg-blood" value="AB">AB</label>
                     </div>
                 </div>
                 <div class="input_box">
                     <p>DM</p>
                     <div class="label_box">
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-5" name="svg-dm" value="⭕️">⭕️</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-5" name="svg-dm" value="❌">❌</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-5" name="svg-dm" value="⭕️">⭕️</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-5" name="svg-dm" value="❌">❌</label>
                     </div>
                 </div>
                 <div class="input_box">
                     <p>LINE</p>
                     <div class="label_box">
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-9" name="svg-line" value="⭕️">⭕️</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-9" name="svg-line" value="❌">❌</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-9" name="svg-line" value="⭕️">⭕️</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-9" name="svg-line" value="❌">❌</label>
                     </div>
                 </div>
                 <div class="input_box">
                     <p>Instagram</p>
                     <div class="label_box">
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-10" name="svg-insta" value="⭕️">⭕️</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-10" name="svg-insta" value="❌">❌</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-10" name="svg-insta" value="⭕️">⭕️</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-10" name="svg-insta" value="❌">❌</label>
                     </div>
                 </div>
                 <div class="input_box">
                     <p>性別</p>
                     <div class="label_box">
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-8" name="svg-gender" value="⭕️">Woman</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-6" name="svg-gender" value="⭕️">Man</label>
-                        <label><input type="radio" class="form-control svg-text" data-target="#text-7" name="svg-gender" value="⭕️">X gender</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-8" name="svg-gender" value="⭕️">Woman</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-6" name="svg-gender" value="⭕️">Man</label>
+                        <label><input type="radio" class="svg-text" data-target="#text-7" name="svg-gender" value="⭕️">X gender</label>
                     </div>
                 </div>
                 <div class="input_box">
-                    <input type="text" class="form-control svg-text" data-target="#text-11" value="" placeholder="将来の夢は？" maxlength="15"/>
+                    <input type="text" class="svg-text" data-target="#text-11" value="" placeholder="将来の夢は？" maxlength="15"/>
                 </div>
                 <div class="input_box">
-                    <input type="text" class="form-control svg-text" data-target="#text-12" value="" placeholder="誕生日は？" maxlength="10"/>
+                    <input type="text" class="svg-text" data-target="#text-12" value="" placeholder="誕生日は？" maxlength="10"/>
                 </div>
                 <div class="input_box">
                     <p>フリースペース</p>
-                    <textarea name="freespace" wrap="hard" maxlength="60" placeholder="60文字以内" class="form-control text-freespace" data-target="#text-13" rows="3"></textarea>
+                    <textarea name="freespace" wrap="hard" maxlength="60" placeholder="60文字以内" class="text-freespace" data-target="#text-13" rows="3"></textarea>
                 </div>
                 
                 <button class="svg-make_button" id="js-create-image">画像を取得</button>
             </div>
         </div>
     </main>
+
+    
 
     <!-- modal -->
     <section id="modalArea" class="modalArea">
@@ -219,7 +224,9 @@
     </section>
     <!-- Body code goes here -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="js/vendor/cropper.js"></script>
     <script src="js/main.js"></script>
     <script src="js/header.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
 </body>
 </html>
