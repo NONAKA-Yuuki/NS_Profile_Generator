@@ -34,7 +34,7 @@ $(".js-imageFile").on("change", function(){
 
 //選択ファイル読み込み
 function selectImage(){
-  var file = document.getElementById('js-icon_image').files[0];
+  var file = document.getElementById('image-file').files[0];
   var reader = new FileReader();
   reader.onload = function() {
     showFileImage(reader)
@@ -68,7 +68,7 @@ $(".js-trimmingModal").on("shown.bs.modal", function(){
 });
 
 function showIconImage(img_b64) {
-  console.log(img_b64);
+  console.log(img_b64); // デバッグ用です
   $icon = $("#js-icon_image");
   $icon.attr(
     "xlink:href",
