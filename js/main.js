@@ -26,7 +26,49 @@ function uploadIconImage(hoge) {
   fileData.readAsDataURL(hoge.files[0]);
 }
 
+
+//アイコン画像クロップ
+$(".js-imageFile").on("change", function(){
+  selectImage();
+});
+
+//選択ファイル読み込み
+function selectImage(){
+  var file = document.getElementById('js-icon_image').files[0];
+  var reader = new FileReader();
+  reader.onload = function() {
+    showFileImage(reader)
+  }
+  reader.readAsDataURL(file);
+};
+//トリミング用のモーダルに画像をセットする(まだ非表示)
+function showFileImage(reader){
+  $(".js-trimmingAreaImg").attr("src", reader.result)
+};
+
+//モーダルが表示されたらトリミング画面開始
+$(".js-trimmingModal").on("shown.bs.modal", function(){
+  //画像トリミング
+  var image = $(".js-trimmingAreaImg")[0];
+  var options = {aspectRatio: 1 / 1};
+  var cropper = new Cropper(image, options);
+  //ボタンをクリックしたらトリミング終了
+  $(".js-trimmingBtn").one("click", function(e) {
+    //トリミングしたデータ
+    var result = cropper.getCroppedCanvas({width: 500, height: 500})
+    var result_dataurl = result.toDataURL()
+    //トリミングデータを表示
+    showIconImage(result_dataurl)
+    //$(".js-trimmedImg").attr("src", result.toDataURL())
+    // 一旦トリミングしたらトリミングのデータはリセット
+    cropper.destroy()
+    // モーダル非表示
+    $(".js-trimmingModal").modal("hide")
+  });
+});
+
 function showIconImage(img_b64) {
+  console.log(img_b64);
   $icon = $("#js-icon_image");
   $icon.attr(
     "xlink:href",
